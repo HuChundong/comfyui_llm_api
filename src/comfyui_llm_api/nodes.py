@@ -109,6 +109,7 @@ class LLMAPINode:
             if response.status_code == 200:
                 try:
                     result = response.json()
+                    print(result["choices"][0]["message"]["content"])
                     return (result["choices"][0]["message"]["content"],)
                 except (ValueError, KeyError) as e:
                     error_msg = f"""Failed to parse API response:

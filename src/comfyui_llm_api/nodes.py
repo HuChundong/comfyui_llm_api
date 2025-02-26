@@ -61,7 +61,7 @@ class LLMAPINode:
     FUNCTION = "process"
     CATEGORY = "LLM"
 
-    def process(self, prompt, base_url, model, temperature, api_key, image=None):
+    def process(self, system, prompt, base_url, model, temperature, api_key, image=None):
         """
         Process the prompt through the LLM API, optionally including an image
         """
@@ -94,7 +94,7 @@ class LLMAPINode:
                 messages = [{"role": "user", "content": [message_content]}]
             else:
                 # Handle text-only request
-                messages = [{"role": "user", "content": prompt}]
+                messages = [{"role": "system", "content": system},{"role": "user", "content": prompt}]
 
             data = {
                 "model": model,
